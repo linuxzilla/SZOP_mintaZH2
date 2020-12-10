@@ -1,0 +1,1 @@
+SZOP_mintaZH2
