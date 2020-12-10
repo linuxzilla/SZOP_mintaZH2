@@ -2,15 +2,22 @@
 <users>
   <User>
     <Name>joedao</Name>
-    <Password></Password>
+    <Password>test</Password>
     <FullName>Joe Dao</FullName>
-    <Address></Address>
-    <Role></Role>
+    <Address>Budapest</Address>
+    <Role>CRIMINAL</Role>
     <CriminalRecords>
-      <Crime></Crime>
-      <Crime></Crime>
-      <Crime></Crime>
-      <Crime></Crime>
+      <Crime>Burglary</Crime>
+      <Crime>Car theft</Crime>
+    </CriminalRecords>
+  </User>
+  <User>
+    <Name>janedao</Name>
+    <Password>test</Password>
+    <FullName>Jane Dao</FullName>
+    <Address>Szolnok</Address>
+    <Role>JUDGE</Role>
+    <CriminalRecords>
     </CriminalRecords>
   </User>
 </users>
