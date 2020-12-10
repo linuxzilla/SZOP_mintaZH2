@@ -16,6 +16,10 @@ namespace Server
             {
                 return username;
             }
+            set
+            {
+                username = value;
+            }
         }
         private string password;
         public string Password
@@ -23,6 +27,10 @@ namespace Server
             get
             {
                 return password;
+            }
+            set
+            {
+                password = value;
             }
         }
         private string fullname;
@@ -32,6 +40,10 @@ namespace Server
             {
                 return fullname;
             }
+            set
+            {
+                fullname = value;
+            }
         }
         private string address;
         public string Address
@@ -39,6 +51,10 @@ namespace Server
             get
             {
                 return address;
+            }
+            set
+            {
+                address = value;
             }
         }
         private List<string> criminalRecords;
@@ -48,6 +64,10 @@ namespace Server
             {
                 return criminalRecords;
             }
+            set
+            {
+                criminalRecords = value;
+            }
         }
         private RolesEnum role;
         public RolesEnum Role
@@ -55,6 +75,10 @@ namespace Server
             get
             {
                 return role;
+            }
+            set
+            {
+                role = value;
             }
         }
         private bool userIsLoggedIN = false;
@@ -64,8 +88,23 @@ namespace Server
             {
                 return userIsLoggedIN;
             }
+            set
+            {
+                userIsLoggedIN = value;
+            }
         }
         #endregion
-
+        #region Constructor
+        public User(string Username, string Password, 
+            string Fullname, string Address, List<string> CriminalRecords, RolesEnum Role)
+        {
+            this.Username = Username;
+            this.Password = Password;
+            this.Fullname = Fullname;
+            this.Address = Address;
+            this.CriminalRecords = CriminalRecords;
+            this.Role = Role;
+        }
+        #endregion
     }
 }
