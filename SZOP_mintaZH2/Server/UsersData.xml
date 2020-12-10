@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<users>
+<Users>
   <User>
-    <Name>joedao</Name>
+    <Username>joedao</Username>
     <Password>test</Password>
-    <FullName>Joe Dao</FullName>
+    <FullName>"Joe Dao"</FullName>
     <Address>Budapest</Address>
     <Role>CRIMINAL</Role>
     <CriminalRecords>
@@ -12,12 +12,14 @@
     </CriminalRecords>
   </User>
   <User>
-    <Name>janedao</Name>
+    <Username>janedao</Username>
     <Password>test</Password>
     <FullName>Jane Dao</FullName>
     <Address>London</Address>
     <Role>JUDGE</Role>
     <CriminalRecords>
+      <Crime>Car theft</Crime>
+      <Crime>Car theft</Crime>
     </CriminalRecords>
   </User>
-</users>
+</Users>

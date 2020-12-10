@@ -64,10 +64,6 @@ namespace Server
             {
                 return criminalRecords;
             }
-            set
-            {
-                criminalRecords = value;
-            }
         }
         private RolesEnum role;
         public RolesEnum Role
@@ -96,14 +92,17 @@ namespace Server
         #endregion
         #region Constructor
         public User(string Username, string Password, 
-            string Fullname, string Address, List<string> CriminalRecords, RolesEnum Role)
+            string Fullname, string Address, RolesEnum Role)
         {
             this.Username = Username;
             this.Password = Password;
             this.Fullname = Fullname;
             this.Address = Address;
-            this.CriminalRecords = CriminalRecords;
             this.Role = Role;
+        }
+        public void AddCriminalRecord(string input)
+        {
+            criminalRecords.Add(input);
         }
         #endregion
     }
