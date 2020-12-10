@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<users>
+  <User>
+    <Name>joedao</Name>
+    <Password></Password>
+    <FullName>Joe Dao</FullName>
+    <Address></Address>
+    <Role></Role>
+    <CriminalRecords>
+      <Crime></Crime>
+      <Crime></Crime>
+      <Crime></Crime>
+      <Crime></Crime>
+    </CriminalRecords>
+  </User>
+</users>
