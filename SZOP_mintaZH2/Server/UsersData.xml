@@ -3,7 +3,7 @@
   <User>
     <Username>joedao</Username>
     <Password>test</Password>
-    <FullName>"Joe Dao"</FullName>
+    <FullName>Joe Dao</FullName>
     <Address>Budapest</Address>
     <Role>CRIMINAL</Role>
     <CriminalRecords>
@@ -18,8 +18,6 @@
     <Address>London</Address>
     <Role>JUDGE</Role>
     <CriminalRecords>
-      <Crime>Car theft</Crime>
-      <Crime>Car theft</Crime>
     </CriminalRecords>
   </User>
 </Users>

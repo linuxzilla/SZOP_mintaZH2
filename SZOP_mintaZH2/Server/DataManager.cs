@@ -16,9 +16,9 @@ namespace Server
 
         #region Public methods and functions
         public static void Add(string Username, string Password,
-            string Fullname, string Address, RolesEnum Role)
+            string Fullname, string Address, RolesEnum Role, List<string> CriminalRecords)
         {
-            users.Add(Username, new User(Username, Password, Fullname, Address, Role));
+            users.Add(Username, new User(Username, Password, Fullname, Address, Role, CriminalRecords));
         }
         public static void ReadUsersFromXml(string FilePath)
         {
@@ -29,25 +29,15 @@ namespace Server
                     item.Element("Password").Value,
                     item.Element("FullName").Value,
                     item.Element("Address").Value,
-                    StringToEnum(item.Element("Role").Value));
-                foreach (var CrimeElement in item.Descendants("CriminalRecords"))
-                {
-                    Console.WriteLine(CrimeElement.Element("Crime").Value);
-                }
+                    StringToEnum(item.Element("Role").Value),
+                    item.Elements("CriminalRecords").Descendants("Crime").Select(r => r.Value as string) as List<string>
+                    );
             }
         }
 
         private static RolesEnum StringToEnum(string input)
         {
-            try
-            {
-                return (RolesEnum)Enum.Parse(typeof(RolesEnum), input, true);
-            }
-            catch (ArgumentException)
-            {
-                Console.WriteLine("ArgumentException");
-                throw;
-            }
+            return (RolesEnum)Enum.Parse(typeof(RolesEnum), input, true);
         }
 
         #endregion

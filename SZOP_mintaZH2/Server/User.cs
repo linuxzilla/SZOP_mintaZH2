@@ -9,100 +9,30 @@ namespace Server
     public class User
     {
         #region Properties
-        private string username;
-        public string Username
-        {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                username = value;
-            }
-        }
-        private string password;
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
-        }
-        private string fullname;
-        public string Fullname
-        {
-            get
-            {
-                return fullname;
-            }
-            set
-            {
-                fullname = value;
-            }
-        }
-        private string address;
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
-        }
-        private List<string> criminalRecords;
-        public List<string> CriminalRecords
-        {
-            get
-            {
-                return criminalRecords;
-            }
-        }
-        private RolesEnum role;
-        public RolesEnum Role
-        {
-            get
-            {
-                return role;
-            }
-            set
-            {
-                role = value;
-            }
-        }
-        private bool userIsLoggedIN = false;
-        public bool UserIsLoggedIN
-        {
-            get
-            {
-                return userIsLoggedIN;
-            }
-            set
-            {
-                userIsLoggedIN = value;
-            }
-        }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Fullname { get; set; }
+        public string Address { get; set; }
+        public List<string> CriminalRecords { get; set; }
+        public RolesEnum Role { get; set; }
+        public bool UserIsLoggedIN { get; set; }
         #endregion
         #region Constructor
         public User(string Username, string Password, 
-            string Fullname, string Address, RolesEnum Role)
+            string Fullname, string Address, RolesEnum Role, List<string> CriminalRecords)
         {
             this.Username = Username;
             this.Password = Password;
             this.Fullname = Fullname;
             this.Address = Address;
             this.Role = Role;
+            this.CriminalRecords = CriminalRecords;
         }
+        #endregion
+        #region Methods and Functions
         public void AddCriminalRecord(string input)
         {
-            criminalRecords.Add(input);
+            CriminalRecords.Add(input);
         }
         #endregion
     }
