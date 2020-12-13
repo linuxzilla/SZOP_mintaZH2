@@ -12,6 +12,7 @@ namespace Server
     {
         #region Private variables
         private static Dictionary<string, User> users = new Dictionary<string, User>();
+        private static Random random = new Random();
         #endregion
 
         #region Public methods and functions
@@ -19,6 +20,22 @@ namespace Server
             string Fullname, string Address, RolesEnum Role, List<string> CriminalRecords)
         {
             users.Add(Username, new User(Username, Password, Fullname, Address, Role, CriminalRecords));
+        }
+        public static string Login(string username, string password, string clientIPAdress)
+        {
+            if (!users.ContainsKey(username))
+                throw new UserNotExistException();
+
+            User tempUser = users[username];
+
+            if (tempUser.Password != username)
+                throw new WrongPasswordException();
+
+            tempUser.UserIsLoggedIN = true;
+            tempUser.ClientIPAdress = clientIPAdress;
+            tempUser.Key = random.Next(10000, 100000).ToString();
+
+            return tempUser.Key;
         }
         public static void ReadUsersFromXml(string FilePath)
         {
@@ -33,6 +50,11 @@ namespace Server
                     item.Elements("CriminalRecords").Descendants("Crime").Select(r => r.Value as string) as List<string>
                     );
             }
+        }
+
+        public static void WriteUserToXml(string FilePath)
+        {
+
         }
 
         private static RolesEnum StringToEnum(string input)

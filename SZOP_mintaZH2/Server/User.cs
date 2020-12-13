@@ -16,6 +16,8 @@ namespace Server
         public List<string> CriminalRecords { get; set; }
         public RolesEnum Role { get; set; }
         public bool UserIsLoggedIN { get; set; }
+        public string Key { get; set; }
+        public string ClientIPAdress { get; set; }
         #endregion
         #region Constructor
         public User(string Username, string Password, 

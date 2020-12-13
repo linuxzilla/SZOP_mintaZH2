@@ -30,6 +30,47 @@ namespace Server
         {
             do
             {
+                try
+                {
+                    string text = reader.ReadLine();
+
+                    string[] data = text.Split('|');
+
+                    switch (data[0])
+                    {
+                        case "LOGIN":
+                            break;
+
+                        case "LOGOUT":
+                            break;
+
+                        case "NOCRIME":
+                            break;
+
+                        case "EXIT":
+                            break;
+
+                        case "NAME":
+                            break;
+
+                        case "LOCALS":
+                            break;
+
+                        case "ADDCRIME":
+                            break;
+
+                        case "PARDON":
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
 
             } while (true);
         }
