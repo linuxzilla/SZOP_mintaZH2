@@ -12,7 +12,6 @@ namespace Server
     {
         #region Private variables
         private static Dictionary<string, User> users = new Dictionary<string, User>();
-        private static Random random = new Random();
         #endregion
 
         #region Public methods and functions
@@ -21,7 +20,7 @@ namespace Server
         {
             users.Add(Username, new User(Username, Password, Fullname, Address, Role, CriminalRecords));
         }
-        public static string Login(string username, string password, string clientIPAdress)
+        public static void Login(string username, string password, string clientIPAdress)
         {
             if (!users.ContainsKey(username))
                 throw new UserNotExistException();
@@ -32,11 +31,9 @@ namespace Server
                 throw new WrongPasswordException();
 
             tempUser.ClientIPAdress = clientIPAdress;
-            tempUser.Key = random.Next(10000, 100000).ToString();
-
-            return tempUser.Key;
+            tempUser.isLoggedIN = true;
         }
-        public static void Logout(string username, string key, string clientIPAdress)
+        public static void Logout(string username, string clientIPAdress)
         {
             if (!users.ContainsKey(username))
                 throw new UserNotExistException();
@@ -46,12 +43,51 @@ namespace Server
             if (tempUser.ClientIPAdress != clientIPAdress)
                 throw new UserInvalidIPException();
 
-            if (tempUser.Key != key)
-                throw new UserInvalidKeyException();
-
-            tempUser.Key = string.Empty;
+            tempUser.isLoggedIN = false;
         }
+        public static List<string> ListNoCrimeUsers()
+        {
+            List<string> tempUsers = new List<string>();
+            foreach (User user in users.Values)
+            {              
+                if (user.CriminalRecords.Count == 0)
+                    tempUsers.Add(user.Username);                    
+            }
+            return tempUsers;
+        }
+        public static string GetUserFullName(string username, string clientIPAdress)
+        {
+            if (!users.ContainsKey(username))
+                throw new UserNotExistException();
 
+            User tempUser = users[username];
+
+            if (!tempUser.isLoggedIN)
+                throw new UserInvalidLoginException();
+
+            if (tempUser.ClientIPAdress != clientIPAdress)
+                throw new UserInvalidLoginException();
+
+            return tempUser.Fullname;
+        }
+        public static List<string> GetLocals(string location, string clientIPAdress)
+        {
+            List<string> tempUsers = new List<string>();
+            foreach (User user in users.Values)
+            {
+                if (user.Address == location)
+                    tempUsers.Add(user.Username);
+            }
+            return tempUsers;
+        }
+        public static void AddCrime(string username, string crime, string clientIPAdress)
+        {
+            if (!users.ContainsKey(username))
+                throw new UserNotExistException();
+
+            User tempUser = users[username];
+            tempUser.AddCriminalRecord(crime);
+        }
         public static void ReadUsersFromXml(string FilePath)
         {
             XDocument xml = XDocument.Load(FilePath);
@@ -62,8 +98,9 @@ namespace Server
                     item.Element("FullName").Value,
                     item.Element("Address").Value,
                     StringToEnum(item.Element("Role").Value),
-                    item.Elements("CriminalRecords").Descendants("Crime").Select(r => r.Value as string) as List<string>
+                    item.Elements("CriminalRecords").Descendants("Crime").Select(r => r.Value).ToList()
                     );
+               
             }
         }
 

@@ -46,7 +46,9 @@
     <Compile Include="ClientThread.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Exceptions\UserInvalidIPException.cs" />
-    <Compile Include="Exceptions\UserInvalidKeyException.cs" />
+    <Compile Include="Exceptions\UserInvalidLoginException.cs" />
+    <Compile Include="Exceptions\UserInvalidRoleException.cs" />
+    <Compile Include="Exceptions\UseRolerNotExistException.cs" />
     <Compile Include="Exceptions\UserNotExistException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

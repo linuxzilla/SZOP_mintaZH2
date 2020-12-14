@@ -15,7 +15,7 @@ namespace Server
         public string Address { get; set; }
         public List<string> CriminalRecords { get; set; }
         public RolesEnum Role { get; set; }
-        public string Key { get; set; }
+        public bool isLoggedIN { get; set; }
         public string ClientIPAdress { get; set; }
         #endregion
         #region Constructor

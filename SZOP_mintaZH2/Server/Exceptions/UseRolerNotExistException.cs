@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    public class UserInvalidKeyException : Exception
+    public class UseRolerNotExistException : Exception
     {
+
     }
 }

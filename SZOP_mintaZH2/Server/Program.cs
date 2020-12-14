@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,14 @@ namespace Server
         static void Main(string[] args)
         {
             Console.WriteLine("Server satarting");
-            DataManager.ReadUsersFromXml(@"Database/UsersData.xml");
+            try
+            {
+                DataManager.ReadUsersFromXml(@"Database/UsersData.xml");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Database not found!");
+            }
             Console.ReadKey();
         }
     }
