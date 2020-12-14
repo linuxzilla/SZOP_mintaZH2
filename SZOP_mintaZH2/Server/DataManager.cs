@@ -31,12 +31,27 @@ namespace Server
             if (tempUser.Password != username)
                 throw new WrongPasswordException();
 
-            tempUser.UserIsLoggedIN = true;
             tempUser.ClientIPAdress = clientIPAdress;
             tempUser.Key = random.Next(10000, 100000).ToString();
 
             return tempUser.Key;
         }
+        public static void Logout(string username, string key, string clientIPAdress)
+        {
+            if (!users.ContainsKey(username))
+                throw new UserNotExistException();
+
+            User tempUser = users[username];
+
+            if (tempUser.ClientIPAdress != clientIPAdress)
+                throw new UserInvalidIPException();
+
+            if (tempUser.Key != key)
+                throw new UserInvalidKeyException();
+
+            tempUser.Key = string.Empty;
+        }
+
         public static void ReadUsersFromXml(string FilePath)
         {
             XDocument xml = XDocument.Load(FilePath);

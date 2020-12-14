@@ -39,6 +39,18 @@ namespace Server
                     switch (data[0])
                     {
                         case "LOGIN":
+                            try
+                            {
+                                if (data.Length != 3)
+                                    throw new Exception();
+
+                                DataManager.Login(data[1], data[2], clientAddress);
+                            }
+                            catch (Exception)
+                            {
+
+                                throw;
+                            }
                             break;
 
                         case "LOGOUT":

@@ -45,18 +45,23 @@
   <ItemGroup>
     <Compile Include="ClientThread.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="Exceptions\UserInvalidIPException.cs" />
+    <Compile Include="Exceptions\UserInvalidKeyException.cs" />
+    <Compile Include="Exceptions\UserNotExistException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RolesEnum.cs" />
+    <Compile Include="Enums\RolesEnum.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Exceptions\WrongPasswordException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UsersData.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Database\UsersData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

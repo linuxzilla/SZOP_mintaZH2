@@ -34,7 +34,7 @@ namespace Server
         static void Main(string[] args)
         {
             Console.WriteLine("Server satarting");
-            DataManager.ReadUsersFromXml("UsersData.xml");
+            DataManager.ReadUsersFromXml(@"Database/UsersData.xml");
             Console.ReadKey();
         }
     }

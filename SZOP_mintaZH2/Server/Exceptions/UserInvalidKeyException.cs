@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    public class UserNotExistException : Exception
+    public class UserInvalidKeyException : Exception
     {
     }
 }
