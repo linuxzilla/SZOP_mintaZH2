@@ -20,4 +20,13 @@
     <CriminalRecords>
     </CriminalRecords>
   </User>
+  <User>
+    <Username>donald_trump</Username>
+    <Password>test</Password>
+    <FullName>Donald Trump</FullName>
+    <Address>Washington</Address>
+    <Role>PRESIDENT</Role>
+    <CriminalRecords>
+    </CriminalRecords>
+  </User>
 </Users>

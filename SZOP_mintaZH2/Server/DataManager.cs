@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,7 @@ namespace Server
             if (tempUser.ClientIPAdress != clientIPAdress)
                 throw new UserInvalidIPException();
 
+            tempUser.ClientIPAdress = string.Empty;
             tempUser.isLoggedIN = false;
         }
         public static List<string> ListNoCrimeUsers()
@@ -51,7 +53,11 @@ namespace Server
             foreach (User user in users.Values)
             {              
                 if (user.CriminalRecords.Count == 0)
-                    tempUsers.Add(user.Username);                    
+                {
+                    tempUsers.Add(user.Username);
+                    Console.WriteLine(user.Username);
+                }
+                                
             }
             return tempUsers;
         }
@@ -72,6 +78,8 @@ namespace Server
         }
         public static List<string> GetLocals(string location, string clientIPAdress)
         {
+            VaidateUserLogin(clientIPAdress);
+
             List<string> tempUsers = new List<string>();
             foreach (User user in users.Values)
             {
@@ -82,11 +90,29 @@ namespace Server
         }
         public static void AddCrime(string username, string crime, string clientIPAdress)
         {
+            User tempJudge = users[VaidateUserLogin(clientIPAdress)];
+
+            if (tempJudge.Role != RolesEnum.JUDGE)
+                throw new UserInvalidRoleException();
+
             if (!users.ContainsKey(username))
                 throw new UserNotExistException();
 
             User tempUser = users[username];
             tempUser.AddCriminalRecord(crime);
+        }
+        public static void PardonCrime(string username, string clientIPAdress)
+        {
+            User tempJudge = users[VaidateUserLogin(clientIPAdress)];
+
+            if (tempJudge.Role != RolesEnum.PRESIDENT)
+                throw new UserInvalidRoleException();
+
+            if (!users.ContainsKey(username))
+                throw new UserNotExistException();
+
+            User tempUser = users[username];
+            tempUser.ClearCriminalRecords();
         }
         public static void ReadUsersFromXml(string FilePath)
         {
@@ -98,7 +124,7 @@ namespace Server
                     item.Element("FullName").Value,
                     item.Element("Address").Value,
                     StringToEnum(item.Element("Role").Value),
-                    item.Elements("CriminalRecords").Descendants("Crime").Select(r => r.Value).ToList()
+                    item.Elements("CriminalRecords").Descendants("Crime").Select(c => c.Value).ToList()
                     );
                
             }
@@ -107,6 +133,19 @@ namespace Server
         public static void WriteUserToXml(string FilePath)
         {
 
+        }
+
+        private static string VaidateUserLogin(string clientIPAdress)
+        {
+            string tempUsername = string.Empty;
+
+            foreach (var user in from user in users where user.Value.ClientIPAdress == clientIPAdress && user.Value.isLoggedIN select user)
+                tempUsername = user.Value.Username;
+
+            if (tempUsername == string.Empty)
+                throw new UserInvalidLoginException();
+
+            return tempUsername;
         }
 
         private static RolesEnum StringToEnum(string input)

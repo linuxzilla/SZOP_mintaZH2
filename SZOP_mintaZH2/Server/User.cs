@@ -35,6 +35,10 @@ namespace Server
         {
             CriminalRecords.Add(input);
         }
+        public void ClearCriminalRecords()
+        {
+            CriminalRecords.Clear();
+        }
         #endregion
     }
 }

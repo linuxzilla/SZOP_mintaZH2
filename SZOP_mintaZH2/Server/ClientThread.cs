@@ -65,6 +65,14 @@ namespace Server
                             break;
 
                         case "NOCRIME":
+                            try
+                            {
+                               writer.WriteLine(string.Join(",", DataManager.ListNoCrimeUsers().ToArray()));
+                            }
+                            catch (Exception e)
+                            {
+                                WrtieOutExceptions(e);
+                            }
                             break;
 
                         case "EXIT":
